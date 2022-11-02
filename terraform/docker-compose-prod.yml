@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  backend:
+    image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/mateusz-kiszka-ted-search:latest
+    container_name: backend
+    ports:
+      - "9191:9191"
+    networks:
+      - ted-search-net
+
+  frontend:
+    image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/mateusz-kiszka-nginx:latest
+    container_name: frontend
+    networks:
+      - ted-search-net
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+networks:
+  ted-search-net:
+    name: ted-search-net
